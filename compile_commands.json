@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/luis-weigl/cpp/synth",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/src/main.cpp.o -c /home/luis-weigl/cpp/synth/src/main.cpp",
+  "file": "/home/luis-weigl/cpp/synth/src/main.cpp",
+  "output": "CMakeFiles/synth.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/luis-weigl/cpp/synth",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/src/waves.cpp.o -c /home/luis-weigl/cpp/synth/src/waves.cpp",
+  "file": "/home/luis-weigl/cpp/synth/src/waves.cpp",
+  "output": "CMakeFiles/synth.dir/src/waves.cpp.o"
+},
+{
+  "directory": "/home/luis-weigl/cpp/synth",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/RtAudio.cpp.o -c /home/luis-weigl/cpp/synth/RtAudio.cpp",
+  "file": "/home/luis-weigl/cpp/synth/RtAudio.cpp",
+  "output": "CMakeFiles/synth.dir/RtAudio.cpp.o"
+},
+{
+  "directory": "/home/luis-weigl/cpp/synth",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/RtMidi.cpp.o -c /home/luis-weigl/cpp/synth/RtMidi.cpp",
+  "file": "/home/luis-weigl/cpp/synth/RtMidi.cpp",
+  "output": "CMakeFiles/synth.dir/RtMidi.cpp.o"
+}
+]
