@@ -1,3 +1,0 @@
-/home/luis-weigl/cpp/synth/build/CMakeFiles/synth.dir
-/home/luis-weigl/cpp/synth/build/CMakeFiles/edit_cache.dir
-/home/luis-weigl/cpp/synth/build/CMakeFiles/rebuild_cache.dir
