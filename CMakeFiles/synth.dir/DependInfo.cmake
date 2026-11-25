@@ -10,7 +10,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/luis-weigl/cpp/synth/RtAudio.cpp" "CMakeFiles/synth.dir/RtAudio.cpp.o" "gcc" "CMakeFiles/synth.dir/RtAudio.cpp.o.d"
   "/home/luis-weigl/cpp/synth/RtMidi.cpp" "CMakeFiles/synth.dir/RtMidi.cpp.o" "gcc" "CMakeFiles/synth.dir/RtMidi.cpp.o.d"
+  "/home/luis-weigl/cpp/synth/src/envelope.cpp" "CMakeFiles/synth.dir/src/envelope.cpp.o" "gcc" "CMakeFiles/synth.dir/src/envelope.cpp.o.d"
   "/home/luis-weigl/cpp/synth/src/main.cpp" "CMakeFiles/synth.dir/src/main.cpp.o" "gcc" "CMakeFiles/synth.dir/src/main.cpp.o.d"
+  "/home/luis-weigl/cpp/synth/src/oscillator.cpp" "CMakeFiles/synth.dir/src/oscillator.cpp.o" "gcc" "CMakeFiles/synth.dir/src/oscillator.cpp.o.d"
+  "/home/luis-weigl/cpp/synth/src/voice.cpp" "CMakeFiles/synth.dir/src/voice.cpp.o" "gcc" "CMakeFiles/synth.dir/src/voice.cpp.o.d"
   "/home/luis-weigl/cpp/synth/src/waves.cpp" "CMakeFiles/synth.dir/src/waves.cpp.o" "gcc" "CMakeFiles/synth.dir/src/waves.cpp.o.d"
   "" "synth" "gcc" "CMakeFiles/synth.dir/link.d"
   )

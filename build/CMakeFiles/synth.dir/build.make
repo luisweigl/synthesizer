@@ -100,10 +100,52 @@ CMakeFiles/synth.dir/src/waves.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/synth.dir/src/waves.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/luis-weigl/cpp/synth/src/waves.cpp -o CMakeFiles/synth.dir/src/waves.cpp.s
 
+CMakeFiles/synth.dir/src/voice.cpp.o: CMakeFiles/synth.dir/flags.make
+CMakeFiles/synth.dir/src/voice.cpp.o: /home/luis-weigl/cpp/synth/src/voice.cpp
+CMakeFiles/synth.dir/src/voice.cpp.o: CMakeFiles/synth.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/synth.dir/src/voice.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/src/voice.cpp.o -MF CMakeFiles/synth.dir/src/voice.cpp.o.d -o CMakeFiles/synth.dir/src/voice.cpp.o -c /home/luis-weigl/cpp/synth/src/voice.cpp
+
+CMakeFiles/synth.dir/src/voice.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/synth.dir/src/voice.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/luis-weigl/cpp/synth/src/voice.cpp > CMakeFiles/synth.dir/src/voice.cpp.i
+
+CMakeFiles/synth.dir/src/voice.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/synth.dir/src/voice.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/luis-weigl/cpp/synth/src/voice.cpp -o CMakeFiles/synth.dir/src/voice.cpp.s
+
+CMakeFiles/synth.dir/src/envelope.cpp.o: CMakeFiles/synth.dir/flags.make
+CMakeFiles/synth.dir/src/envelope.cpp.o: /home/luis-weigl/cpp/synth/src/envelope.cpp
+CMakeFiles/synth.dir/src/envelope.cpp.o: CMakeFiles/synth.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/synth.dir/src/envelope.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/src/envelope.cpp.o -MF CMakeFiles/synth.dir/src/envelope.cpp.o.d -o CMakeFiles/synth.dir/src/envelope.cpp.o -c /home/luis-weigl/cpp/synth/src/envelope.cpp
+
+CMakeFiles/synth.dir/src/envelope.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/synth.dir/src/envelope.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/luis-weigl/cpp/synth/src/envelope.cpp > CMakeFiles/synth.dir/src/envelope.cpp.i
+
+CMakeFiles/synth.dir/src/envelope.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/synth.dir/src/envelope.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/luis-weigl/cpp/synth/src/envelope.cpp -o CMakeFiles/synth.dir/src/envelope.cpp.s
+
+CMakeFiles/synth.dir/src/oscillator.cpp.o: CMakeFiles/synth.dir/flags.make
+CMakeFiles/synth.dir/src/oscillator.cpp.o: /home/luis-weigl/cpp/synth/src/oscillator.cpp
+CMakeFiles/synth.dir/src/oscillator.cpp.o: CMakeFiles/synth.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/synth.dir/src/oscillator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/src/oscillator.cpp.o -MF CMakeFiles/synth.dir/src/oscillator.cpp.o.d -o CMakeFiles/synth.dir/src/oscillator.cpp.o -c /home/luis-weigl/cpp/synth/src/oscillator.cpp
+
+CMakeFiles/synth.dir/src/oscillator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/synth.dir/src/oscillator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/luis-weigl/cpp/synth/src/oscillator.cpp > CMakeFiles/synth.dir/src/oscillator.cpp.i
+
+CMakeFiles/synth.dir/src/oscillator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/synth.dir/src/oscillator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/luis-weigl/cpp/synth/src/oscillator.cpp -o CMakeFiles/synth.dir/src/oscillator.cpp.s
+
 CMakeFiles/synth.dir/RtAudio.cpp.o: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/RtAudio.cpp.o: /home/luis-weigl/cpp/synth/RtAudio.cpp
 CMakeFiles/synth.dir/RtAudio.cpp.o: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/synth.dir/RtAudio.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/synth.dir/RtAudio.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/RtAudio.cpp.o -MF CMakeFiles/synth.dir/RtAudio.cpp.o.d -o CMakeFiles/synth.dir/RtAudio.cpp.o -c /home/luis-weigl/cpp/synth/RtAudio.cpp
 
 CMakeFiles/synth.dir/RtAudio.cpp.i: cmake_force
@@ -117,7 +159,7 @@ CMakeFiles/synth.dir/RtAudio.cpp.s: cmake_force
 CMakeFiles/synth.dir/RtMidi.cpp.o: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/RtMidi.cpp.o: /home/luis-weigl/cpp/synth/RtMidi.cpp
 CMakeFiles/synth.dir/RtMidi.cpp.o: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/synth.dir/RtMidi.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/synth.dir/RtMidi.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/RtMidi.cpp.o -MF CMakeFiles/synth.dir/RtMidi.cpp.o.d -o CMakeFiles/synth.dir/RtMidi.cpp.o -c /home/luis-weigl/cpp/synth/RtMidi.cpp
 
 CMakeFiles/synth.dir/RtMidi.cpp.i: cmake_force
@@ -132,6 +174,9 @@ CMakeFiles/synth.dir/RtMidi.cpp.s: cmake_force
 synth_OBJECTS = \
 "CMakeFiles/synth.dir/src/main.cpp.o" \
 "CMakeFiles/synth.dir/src/waves.cpp.o" \
+"CMakeFiles/synth.dir/src/voice.cpp.o" \
+"CMakeFiles/synth.dir/src/envelope.cpp.o" \
+"CMakeFiles/synth.dir/src/oscillator.cpp.o" \
 "CMakeFiles/synth.dir/RtAudio.cpp.o" \
 "CMakeFiles/synth.dir/RtMidi.cpp.o"
 
@@ -140,13 +185,16 @@ synth_EXTERNAL_OBJECTS =
 
 synth: CMakeFiles/synth.dir/src/main.cpp.o
 synth: CMakeFiles/synth.dir/src/waves.cpp.o
+synth: CMakeFiles/synth.dir/src/voice.cpp.o
+synth: CMakeFiles/synth.dir/src/envelope.cpp.o
+synth: CMakeFiles/synth.dir/src/oscillator.cpp.o
 synth: CMakeFiles/synth.dir/RtAudio.cpp.o
 synth: CMakeFiles/synth.dir/RtMidi.cpp.o
 synth: CMakeFiles/synth.dir/build.make
 synth: CMakeFiles/synth.dir/compiler_depend.ts
 synth: /usr/lib64/pipewire-0.3/jack/libjack.so
 synth: CMakeFiles/synth.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable synth"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/luis-weigl/cpp/synth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable synth"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/synth.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

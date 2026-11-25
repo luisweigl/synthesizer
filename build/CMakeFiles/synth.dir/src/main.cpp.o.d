@@ -182,7 +182,7 @@ CMakeFiles/synth.dir/src/main.cpp.o: \
  /usr/include/c++/16/cassert /usr/include/assert.h \
  /usr/include/c++/16/utility /usr/include/c++/16/bits/stl_relops.h \
  /usr/include/c++/16/bits/intcmp.h \
- /home/luis-weigl/cpp/synth/src/waves.hpp /usr/include/c++/16/algorithm \
+ /home/luis-weigl/cpp/synth/src/filter.hpp /usr/include/c++/16/algorithm \
  /usr/include/c++/16/bits/stl_algo.h \
  /usr/include/c++/16/bits/algorithmfwd.h \
  /usr/include/c++/16/bits/stl_heap.h \
@@ -207,6 +207,11 @@ CMakeFiles/synth.dir/src/main.cpp.o: \
  /usr/include/c++/16/tr1/modified_bessel_func.tcc \
  /usr/include/c++/16/tr1/poly_hermite.tcc \
  /usr/include/c++/16/tr1/poly_laguerre.tcc \
- /usr/include/c++/16/tr1/riemann_zeta.tcc /usr/include/c++/16/queue \
+ /usr/include/c++/16/tr1/riemann_zeta.tcc \
+ /home/luis-weigl/cpp/synth/src/oscillator.hpp \
+ /home/luis-weigl/cpp/synth/src/voice.hpp \
+ /home/luis-weigl/cpp/synth/src/envelope.hpp \
+ /home/luis-weigl/cpp/synth/src/voice_state.hpp \
+ /home/luis-weigl/cpp/synth/src/waves.hpp /usr/include/c++/16/queue \
  /usr/include/c++/16/deque /usr/include/c++/16/bits/stl_deque.h \
  /usr/include/c++/16/bits/deque.tcc /usr/include/c++/16/bits/stl_queue.h

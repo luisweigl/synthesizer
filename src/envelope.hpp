@@ -1,6 +1,6 @@
 #pragma once
 
-#include "voice.hpp"
+#include "voice_state.hpp"
 
 class Envelope {
   private:
@@ -17,5 +17,10 @@ class Envelope {
     void setDecay(float decay);
     void setRelease(float release);
 
-    float getAmplitude(VoiceState state, int samples);
+    float getAttack() const;
+    float getSustain() const;
+    float getDecay() const;
+    float getRelease() const;
+
+    float getAmplitude(VoiceState state, int samples) const;
 };

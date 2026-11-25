@@ -177,6 +177,30 @@ RtMidi.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/RtMidi.cpp.s
 .PHONY : RtMidi.cpp.s
 
+src/envelope.o: src/envelope.cpp.o
+.PHONY : src/envelope.o
+
+# target to build an object file
+src/envelope.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/envelope.cpp.o
+.PHONY : src/envelope.cpp.o
+
+src/envelope.i: src/envelope.cpp.i
+.PHONY : src/envelope.i
+
+# target to preprocess a source file
+src/envelope.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/envelope.cpp.i
+.PHONY : src/envelope.cpp.i
+
+src/envelope.s: src/envelope.cpp.s
+.PHONY : src/envelope.s
+
+# target to generate assembly for a file
+src/envelope.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/envelope.cpp.s
+.PHONY : src/envelope.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -200,6 +224,54 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/oscillator.o: src/oscillator.cpp.o
+.PHONY : src/oscillator.o
+
+# target to build an object file
+src/oscillator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/oscillator.cpp.o
+.PHONY : src/oscillator.cpp.o
+
+src/oscillator.i: src/oscillator.cpp.i
+.PHONY : src/oscillator.i
+
+# target to preprocess a source file
+src/oscillator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/oscillator.cpp.i
+.PHONY : src/oscillator.cpp.i
+
+src/oscillator.s: src/oscillator.cpp.s
+.PHONY : src/oscillator.s
+
+# target to generate assembly for a file
+src/oscillator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/oscillator.cpp.s
+.PHONY : src/oscillator.cpp.s
+
+src/voice.o: src/voice.cpp.o
+.PHONY : src/voice.o
+
+# target to build an object file
+src/voice.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/voice.cpp.o
+.PHONY : src/voice.cpp.o
+
+src/voice.i: src/voice.cpp.i
+.PHONY : src/voice.i
+
+# target to preprocess a source file
+src/voice.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/voice.cpp.i
+.PHONY : src/voice.cpp.i
+
+src/voice.s: src/voice.cpp.s
+.PHONY : src/voice.s
+
+# target to generate assembly for a file
+src/voice.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/src/voice.cpp.s
+.PHONY : src/voice.cpp.s
 
 src/waves.o: src/waves.cpp.o
 .PHONY : src/waves.o
@@ -240,9 +312,18 @@ help:
 	@echo "... RtMidi.o"
 	@echo "... RtMidi.i"
 	@echo "... RtMidi.s"
+	@echo "... src/envelope.o"
+	@echo "... src/envelope.i"
+	@echo "... src/envelope.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/oscillator.o"
+	@echo "... src/oscillator.i"
+	@echo "... src/oscillator.s"
+	@echo "... src/voice.o"
+	@echo "... src/voice.i"
+	@echo "... src/voice.s"
 	@echo "... src/waves.o"
 	@echo "... src/waves.i"
 	@echo "... src/waves.s"

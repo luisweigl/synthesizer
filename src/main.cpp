@@ -1,6 +1,7 @@
 #include "RtAudio.h"
 #include "RtMidi.h"
 #include "SPSCQueue.h"
+#include "filter.hpp"
 #include "oscillator.hpp"
 #include "voice.hpp"
 #include "waves.hpp"
@@ -35,11 +36,11 @@ struct State {
     rigtorp::SPSCQueue<MidiEvent> *midiQueue;
     std::array<Voice, VOICES> *voices;
     std::array<Oscillator, OSCILLATORS> *oscillators;
-    float attack;
-    float release;
+    Envelope *envelope;
     float amplitude;
     float cutoff;
-    float filteredSample;
+    float resonance;
+    LowPassFilter filter;
 };
 
 void cleanup(RtAudio &audio) {
@@ -54,36 +55,40 @@ void cleanup(RtAudio &audio) {
 int selectOutputDevice(RtAudio &audio) {
     std::vector<unsigned int> deviceIds = audio.getDeviceIds();
 
-    RtAudio::DeviceInfo info;
-
-    std::cout << "Avilable devices:" << std::endl;
+    std::vector<unsigned int> outputIds;
+    std::cout << "Available stereo output devices:" << std::endl;
 
     for (auto id : deviceIds) {
-        info = audio.getDeviceInfo(id);
-        std::cout << "[" << id << "]" << info.name << std::endl;
+        const auto info = audio.getDeviceInfo(id);
+        if (info.outputChannels < 2)
+            continue;
+        outputIds.push_back(id);
+        std::cout << "[" << id << "] " << info.name << std::endl;
     }
-    std::cout << "Select a device: ";
-
-    std::string input;
-    std::getline(std::cin, input);
-
-    std::size_t pos;
-    int value = std::stol(input, &pos);
-
-    if (input[pos] != '\0') {
-        std::cout << "Invalid input!" << std::endl;
-        cleanup(audio);
+    if (outputIds.empty()) {
+        std::cerr << "No stereo output devices available.\n";
         exit(EXIT_FAILURE);
     }
 
-    if (find(deviceIds.begin(), deviceIds.end(), value) == deviceIds.end()) {
-        std::cout << "Invalid device id!" << std::endl;
+    while (true) {
+        std::cout << "Select an output device: ";
+        std::string input;
+        if (!std::getline(std::cin, input))
+            exit(EXIT_FAILURE);
+
+        try {
+            std::size_t pos;
+            const auto value = std::stoul(input, &pos);
+            if (pos == input.size() &&
+                std::find(outputIds.begin(), outputIds.end(), value) != outputIds.end()) {
+                std::cout << "Audio output: " << audio.getDeviceInfo(value).name << std::endl;
+                return static_cast<int>(value);
+            }
+        } catch (const std::invalid_argument &) {
+        } catch (const std::out_of_range &) {
+        }
+        std::cout << "Invalid output device id.\n";
     }
-
-    info = audio.getDeviceInfo(value);
-    std::cout << "Now playing on device " << info.name << std::endl;
-
-    return value;
 }
 
 int selectMidiDevice(RtMidiIn &midi) {
@@ -116,100 +121,71 @@ int audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFra
     auto midiQueue = state->midiQueue;
     auto voices = state->voices;
     auto oscillators = state->oscillators;
+    auto envelope = state->envelope;
 
     if (status)
         std::cout << "Stream underflow detected!" << std::endl;
 
     while (!midiQueue->empty()) {
 
-        MidiEvent *event = midiQueue->front();
+        MidiEvent &event = *midiQueue->front();
 
-        if (event->type == MidiEventType::NoteOn) {
+        if (event.type == NoteOn) {
             for (Voice &voice : *voices) {
-                if (voice.state == VoiceState::Mute) {
-                    voice.state = VoiceState::Attack;
-                    voice.playtime = 0;
-                    voice.amplitude = 0;
-                    voice.targetAmp = 0.2;
-                    voice.note = event->note;
+                if (voice.getState() == Disabled) {
+                    voice.noteOn(event.note);
                     break;
                 }
             }
-        } else if (event->type == MidiEventType::NoteOff) {
+        } else if (event.type == NoteOff) {
             for (Voice &voice : *voices) {
-                if (voice.state != VoiceState::Mute && voice.state != VoiceState::Release &&
-                    voice.note == event->note) {
-                    voice.state = VoiceState::Release;
+                if (voice.getState() != Disabled && voice.getState() != Release &&
+                    voice.getNote() == event.note) {
+                    voice.noteOff();
                     break;
                 }
             }
-        } else {
-            float normalized = event->value / 127.0f;
-            if (event->controller == 14) {
-                state->cutoff = normalized * 5000.0f;
-            } else if (event->controller == 15) {
-                state->release = 0.01f + normalized * 1.99f;
-            } else if (event->controller == 16) {
-                state->amplitude = 0.0f + normalized * 1.0f;
-
-            } else if (event->controller == 17) {
-                if (normalized > 0.5) {
-                    state->waveType = WaveType::Saw;
-                } else {
-                    state->waveType = WaveType::Sin;
-                }
+        } else if (event.type == ControlChange) {
+            const float normalized = std::clamp(event.value, 0, 127) / 127.0f;
+            switch (event.controller) {
+            case 14:
+                // Exponential sweep gives the low frequencies more knob travel.
+                state->cutoff = 20.0f * std::pow(1000.0f, normalized);
+                break;
+            case 15:
+                state->resonance = normalized;
+                break;
+            case 16: {
+                // Oscillator 1 stays in tune; oscillator 2 moves +/-25 cents.
+                const int value = std::clamp(event.value, 0, 127);
+                const float detune = value <= 64 ? (value - 64) * (25.0f / 64.0f)
+                                                 : (value - 64) * (25.0f / 63.0f);
+                (*oscillators)[1].setDetune(detune);
+                break;
+            }
+            case 17:
+                envelope->setRelease(0.01f * std::pow(300.0f, normalized));
+                break;
             }
         }
 
         midiQueue->pop();
     }
 
-    float delta = 1.0 / SAMPLE_RATE;
+    state->filter.setParameters(state->cutoff, state->resonance, SAMPLE_RATE);
 
     for (unsigned int i = 0; i < nBufferFrames; i++) {
         float sample = 0.0;
 
         for (Voice &voice : *voices) {
 
-            if (voice.state == VoiceState::Mute) {
-                continue;
-            }
-
-            if (voice.state == VoiceState::Attack) {
-                float increment = (voice.targetAmp / state->attack) * delta;
-                voice.amplitude = std::min(voice.amplitude + increment, voice.targetAmp);
-
-                if (voice.amplitude == voice.targetAmp) {
-                    voice.state = VoiceState::Playing;
-                }
-
-            } else if (voice.state == VoiceState::Release) {
-                float decrement = (voice.targetAmp / state->release) * delta;
-                voice.amplitude = std::max(voice.amplitude - decrement, 0.0f);
-
-                if (voice.amplitude == 0) {
-                    voice.state = VoiceState::Mute;
-                }
-            }
-
-            float frequency = midiToFreqeuncy(voice.note);
-            if (state->waveType == WaveType::Sin) {
-                sample += sine_wave(voice.amplitude, frequency, voice.playtime);
-            } else {
-                sample += saw_wave(voice.amplitude, frequency, voice.playtime);
-            }
-            voice.playtime += delta;
+            sample += voice.getSample(*oscillators, *envelope);
         }
 
         sample *= state->amplitude;
 
+        sample = state->filter.process(sample);
         sample = std::clamp(sample, -1.0f, 1.0f);
-
-        float alpha = 1.0f - std::exp(-2.0f * 3.14159265f * state->cutoff / SAMPLE_RATE);
-
-        state->filteredSample += alpha * (sample - state->filteredSample);
-
-        sample = state->filteredSample;
 
         output[2 * i] = sample;
         output[2 * i + 1] = sample;
@@ -258,31 +234,35 @@ int main(int, char **) {
     std::unique_ptr<RtMidiIn> midi;
 
     RtAudio::StreamParameters parameters;
-    parameters.deviceId = audio.getDefaultOutputDevice();
+    parameters.deviceId = selectOutputDevice(audio);
     parameters.nChannels = 2;
 
     unsigned int sampleRate = SAMPLE_RATE;
     unsigned int bufferFrames = BUFFER_FRAMES;
 
+    Envelope envelope;
+    envelope.setRelease(0.3f);
+
     std::array<Oscillator, 2> oscillators{};
+
+    for (Oscillator &oscillator : oscillators) {
+        oscillator.setLevel(0.2f);
+        oscillator.setWaveform(Sawtooth);
+    }
+    oscillators[1].setDetune(7.0f);
 
     std::array<Voice, VOICES> voices{};
 
-    for (Voice &voice : voices) {
-        voice.state = VoiceState::Mute;
-    }
-
     rigtorp::SPSCQueue<MidiEvent> midiQueue(100);
 
-    State state;
+    State state{};
     state.midiQueue = &midiQueue;
+    state.oscillators = &oscillators;
+    state.envelope = &envelope;
     state.voices = &voices;
-    state.attack = 0.01;
-    state.release = 0.01;
-    state.cutoff = 20000.0;
+    state.cutoff = 5000.0f;
+    state.resonance = 0.0f;
     state.amplitude = 0.5f;
-    state.filteredSample = 0.0f;
-    state.waveType = WaveType::Sin;
 
     if (audio.openStream(&parameters, NULL, RTAUDIO_FLOAT32, sampleRate, &bufferFrames,
                          &audioCallback, &state, NULL) != 0) {

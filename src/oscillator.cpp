@@ -35,4 +35,6 @@ float Oscillator::getSample(float phase) const {
         return triangle_wave(level, phase);
         break;
     }
+
+    return 0.0f;
 }

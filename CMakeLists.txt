@@ -11,6 +11,9 @@ pkg_check_modules(JACK REQUIRED IMPORTED_TARGET jack)
 add_executable(synth
     src/main.cpp
     src/waves.cpp
+    src/voice.cpp
+    src/envelope.cpp
+    src/oscillator.cpp
     RtAudio.cpp
     RtMidi.cpp
 )

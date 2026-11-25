@@ -13,6 +13,24 @@
 },
 {
   "directory": "/home/luis-weigl/cpp/synth/build",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -g -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/src/voice.cpp.o -c /home/luis-weigl/cpp/synth/src/voice.cpp",
+  "file": "/home/luis-weigl/cpp/synth/src/voice.cpp",
+  "output": "CMakeFiles/synth.dir/src/voice.cpp.o"
+},
+{
+  "directory": "/home/luis-weigl/cpp/synth/build",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -g -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/src/envelope.cpp.o -c /home/luis-weigl/cpp/synth/src/envelope.cpp",
+  "file": "/home/luis-weigl/cpp/synth/src/envelope.cpp",
+  "output": "CMakeFiles/synth.dir/src/envelope.cpp.o"
+},
+{
+  "directory": "/home/luis-weigl/cpp/synth/build",
+  "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -g -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/src/oscillator.cpp.o -c /home/luis-weigl/cpp/synth/src/oscillator.cpp",
+  "file": "/home/luis-weigl/cpp/synth/src/oscillator.cpp",
+  "output": "CMakeFiles/synth.dir/src/oscillator.cpp.o"
+},
+{
+  "directory": "/home/luis-weigl/cpp/synth/build",
   "command": "/usr/bin/c++ -D__UNIX_JACK__ -I/home/luis-weigl/cpp/synth -g -std=gnu++20 -D_REENTRANT -o CMakeFiles/synth.dir/RtAudio.cpp.o -c /home/luis-weigl/cpp/synth/RtAudio.cpp",
   "file": "/home/luis-weigl/cpp/synth/RtAudio.cpp",
   "output": "CMakeFiles/synth.dir/RtAudio.cpp.o"

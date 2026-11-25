@@ -4,6 +4,9 @@ synth: \
   /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o \
   CMakeFiles/synth.dir/src/main.cpp.o \
   CMakeFiles/synth.dir/src/waves.cpp.o \
+  CMakeFiles/synth.dir/src/voice.cpp.o \
+  CMakeFiles/synth.dir/src/envelope.cpp.o \
+  CMakeFiles/synth.dir/src/oscillator.cpp.o \
   CMakeFiles/synth.dir/RtAudio.cpp.o \
   CMakeFiles/synth.dir/RtMidi.cpp.o \
   /usr/lib64/pipewire-0.3/jack/libjack.so \
@@ -52,6 +55,12 @@ synth: \
 CMakeFiles/synth.dir/src/main.cpp.o:
 
 CMakeFiles/synth.dir/src/waves.cpp.o:
+
+CMakeFiles/synth.dir/src/voice.cpp.o:
+
+CMakeFiles/synth.dir/src/envelope.cpp.o:
+
+CMakeFiles/synth.dir/src/oscillator.cpp.o:
 
 CMakeFiles/synth.dir/RtAudio.cpp.o:
 

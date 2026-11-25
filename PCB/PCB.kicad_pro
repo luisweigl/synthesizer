@@ -615,14 +615,44 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Type",
+          "name": "Sim.Type",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Beschreibung",
+          "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Device",
+          "name": "Sim.Device",
+          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "Default Editing",
+      "name": "",
       "sort_asc": true,
-      "sort_field": "Referenz"
+      "sort_field": "Reference"
     },
     "bus_aliases": {},
     "connection_grid_size": 50.0,
@@ -665,7 +695,7 @@
         "uuid": "c56d1e44-6f8e-4715-9078-ff7c2bdf6c77"
       }
     ],
-    "used_designators": "Detune2-3,ENV_ATTACK1,ENV_DECAY1,ENV_REL1,ENV_SUS1,FILTER_COFF1,FILTER_RES1,FILTER_TYPE1-2,GLOB_GLIDE1,GLOB_VOL1,LFO_AMOUNT1-2,LFO_DEST1,LFO_Dest1,LFO_RATE1,LFO_WAVE1,OSC_OCT_2-4,Octav2-3,RV1,SW1-2,Semi2-3,U1,Wave2-3",
+    "used_designators": "#FLG1,AudioShield1,Detune2-3,ENV_ATTACK1,ENV_DECAY1,ENV_REL1,ENV_SUS1,FILTER_COFF1-2,FILTER_ENV1,FILTER_RES1,FILTER_TYPE1-2,GLOB_GLIDE1,GLOB_VOL1,LFO_AMOUNT1-2,LFO_DEST1,LFO_Dest1,LFO_RATE1,LFO_WAVE1,OSC1_DT1,OSC1_LVL1,OSC1_OCT1,OSC1_PW1-2,OSC1_WAVE1,OSC2_DT1,OSC2_LVL1,OSC2_OCT1,OSC2_WAVE1,OSC_DT_3,OSC_OCT_2-4,OSC_PW_2,OSC_WAVE_3-4,Octav2-3,R1-29,RV1,SW1-2,Semi2-3,U1-3,Wave2-3",
     "variants": []
   },
   "sheets": [
