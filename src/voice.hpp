@@ -22,6 +22,5 @@ class Voice {
     int getNote() const;
     void noteOn(int note);
     void noteOff();
-    float getSample(const std::array<Oscillator, OSCILLATORS> &oscillators,
-                    const Envelope &envelope);
+    float getSample(std::array<Oscillator, OSCILLATORS> &oscillators, const Envelope &envelope);
 };

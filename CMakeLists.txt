@@ -14,6 +14,8 @@ add_executable(synth
     src/voice.cpp
     src/envelope.cpp
     src/oscillator.cpp
+    src/filter.cpp
+    src/lfo.cpp
     RtAudio.cpp
     RtMidi.cpp
 )

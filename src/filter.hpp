@@ -3,26 +3,34 @@
 #include <algorithm>
 #include <cmath>
 
-class LowPassFilter {
+enum FilterType {
+    LowPass,
+    HighPass,
+    BandPass,
+    Notch,
+};
+
+class Filter {
   private:
-    float integrator1 = 0.0f;
-    float integrator2 = 0.0f;
-    float g = 0.0f;
-    float a1 = 1.0f;
+    FilterType type;
+    float integrator1;
+    float integrator2;
+    float cutoff;
+    float resonance;
+    float sampleRate;
+    float g;
+    float q;
+    float a1;
+    float a2;
+    float a3;
 
   public:
-    void setParameters(float cutoff, float resonance, float sampleRate) {
-        const float q = 0.70710678f + std::clamp(resonance, 0.0f, 1.0f) * 7.29289322f;
-        g = std::tan(M_PI * cutoff / sampleRate);
-        a1 = 1.0f / (1.0f + g * (g + 1.0f / q));
-    }
+    Filter(float sampleRate);
 
-    float process(float input) {
-        // Trapezoidal state-variable filter
-        const float bandPass = a1 * (integrator1 + g * (input - integrator2));
-        const float lowPass = integrator2 + g * bandPass;
-        integrator1 = 2.0f * bandPass - integrator1;
-        integrator2 = 2.0f * lowPass - integrator2;
-        return lowPass;
-    }
+    void setCutoff(float cutoff);
+    void setResonance(float resonance);
+
+    void updateCoefficients();
+
+    float process(float input);
 };

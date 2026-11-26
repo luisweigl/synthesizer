@@ -14,10 +14,14 @@ void Oscillator::setDetune(float detune) { this->detune = detune; }
 
 void Oscillator::setLevel(float level) { this->level = level; }
 
-float Oscillator::getFrequency(float baseFrequency) const {
+float Oscillator::getFrequency() const { return frequency; }
+
+void Oscillator::setFrequency(float frequency) { this->frequency = frequency; }
+
+void Oscillator::setPitch(float baseFrequency) {
     float shift = octave * 12.0f + semitone + detune / 100.0f;
 
-    return baseFrequency * std::pow(2.0f, shift / 12.0f);
+    frequency = baseFrequency * std::pow(2.0f, shift / 12.0f);
 }
 
 float Oscillator::getSample(float phase) const {

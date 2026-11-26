@@ -2,6 +2,7 @@
 #include "RtMidi.h"
 #include "SPSCQueue.h"
 #include "filter.hpp"
+#include "lfo.hpp"
 #include "oscillator.hpp"
 #include "voice.hpp"
 #include "waves.hpp"
@@ -37,10 +38,9 @@ struct State {
     std::array<Voice, VOICES> *voices;
     std::array<Oscillator, OSCILLATORS> *oscillators;
     Envelope *envelope;
+    Filter *filter;
+    LFO *lfo;
     float amplitude;
-    float cutoff;
-    float resonance;
-    LowPassFilter filter;
 };
 
 void cleanup(RtAudio &audio) {
@@ -122,6 +122,7 @@ int audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFra
     auto voices = state->voices;
     auto oscillators = state->oscillators;
     auto envelope = state->envelope;
+    auto filter = state->filter;
 
     if (status)
         std::cout << "Stream underflow detected!" << std::endl;
@@ -150,16 +151,16 @@ int audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFra
             switch (event.controller) {
             case 14:
                 // Exponential sweep gives the low frequencies more knob travel.
-                state->cutoff = 20.0f * std::pow(1000.0f, normalized);
+                filter->setCutoff(20.0f * std::pow(1000.0f, normalized));
                 break;
             case 15:
-                state->resonance = normalized;
+                filter->setResonance(normalized);
                 break;
             case 16: {
                 // Oscillator 1 stays in tune; oscillator 2 moves +/-25 cents.
                 const int value = std::clamp(event.value, 0, 127);
-                const float detune = value <= 64 ? (value - 64) * (25.0f / 64.0f)
-                                                 : (value - 64) * (25.0f / 63.0f);
+                const float detune =
+                    value <= 64 ? (value - 64) * (25.0f / 64.0f) : (value - 64) * (25.0f / 63.0f);
                 (*oscillators)[1].setDetune(detune);
                 break;
             }
@@ -172,8 +173,6 @@ int audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFra
         midiQueue->pop();
     }
 
-    state->filter.setParameters(state->cutoff, state->resonance, SAMPLE_RATE);
-
     for (unsigned int i = 0; i < nBufferFrames; i++) {
         float sample = 0.0;
 
@@ -184,7 +183,7 @@ int audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFra
 
         sample *= state->amplitude;
 
-        sample = state->filter.process(sample);
+        sample = filter->process(sample);
         sample = std::clamp(sample, -1.0f, 1.0f);
 
         output[2 * i] = sample;
@@ -251,6 +250,9 @@ int main(int, char **) {
     }
     oscillators[1].setDetune(7.0f);
 
+    Filter filter(SAMPLE_RATE);
+    LFO lfo(SAMPLE_RATE);
+
     std::array<Voice, VOICES> voices{};
 
     rigtorp::SPSCQueue<MidiEvent> midiQueue(100);
@@ -260,9 +262,9 @@ int main(int, char **) {
     state.oscillators = &oscillators;
     state.envelope = &envelope;
     state.voices = &voices;
-    state.cutoff = 5000.0f;
-    state.resonance = 0.0f;
     state.amplitude = 0.5f;
+    state.filter = &filter;
+    state.lfo = &lfo;
 
     if (audio.openStream(&parameters, NULL, RTAUDIO_FLOAT32, sampleRate, &bufferFrames,
                          &audioCallback, &state, NULL) != 0) {

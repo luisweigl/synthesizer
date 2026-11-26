@@ -23,8 +23,7 @@ void Voice::noteOff() {
     state = Release;
     samples = 0;
 }
-float Voice::getSample(const std::array<Oscillator, OSCILLATORS> &oscillators,
-                       const Envelope &envelope) {
+float Voice::getSample(std::array<Oscillator, OSCILLATORS> &oscillators, const Envelope &envelope) {
 
     if (state == Disabled) {
         return 0.0f;
@@ -35,7 +34,8 @@ float Voice::getSample(const std::array<Oscillator, OSCILLATORS> &oscillators,
     for (int i = 0; i < oscillators.size(); i++) {
         sample += oscillators[i].getSample(phases[i]);
 
-        float frequency = oscillators[i].getFrequency(midiToFreqeuncy(note));
+        oscillators[i].setPitch(midiToFreqeuncy(note));
+        float frequency = oscillators[i].getFrequency();
         phases[i] += frequency / SAMPLE_RATE;
         phases[i] -= std::floor(phases[i]);
     }
